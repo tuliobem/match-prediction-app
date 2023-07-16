@@ -11,7 +11,7 @@
 
 
 </head>
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
     <div class="container mt-4">
         {% block content %}

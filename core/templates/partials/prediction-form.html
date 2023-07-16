@@ -1,0 +1,31 @@
+{# Prediction form. Submission triggered when the "Submit" button is clicked #}
+
+<form style="display: inline;"
+    hx-trigger="click from:#predict-fixture-{{ fixture.pk }}"
+    hx-post="{% url 'submit-prediction' fixture.pk %}"
+    hx-target="closest .prediction-container"
+    hx-swap="outerHTML">
+    
+    <input
+        type="number"
+        min="0"
+        max="30"
+        class="prediction-input"
+        name="home_goals"
+        value="{{ prediction.home_goals }}"
+        @keyup="submittable = $el.value.length && $el.nextElementSibling.value.length"
+        @change="submittable = $el.value.length && $el.nextElementSibling.value.length"
+        required
+    />
+    <input
+        type="number"
+        min="0"
+        max="30"
+        class="prediction-input"
+        name="away_goals" 
+        value="{{ prediction.away_goals }}"
+        @keyup="submittable = $el.value.length && $el.previousElementSibling.value.length"
+        @change="submittable = $el.value.length && $el.previousElementSibling.value.length"
+        required
+    />
+</form>
